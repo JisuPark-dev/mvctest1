@@ -12,7 +12,7 @@ public class SampleController {
 //        return "orderId: 1, orderAmount : 1000";
 //    }
 
-    @PostMapping("/order/1")
+    @GetMapping("/order/1")
     public String createOrder() {
         log.info("create order");
         return "orderId: 1, orderAmount : 1000";
@@ -21,6 +21,9 @@ public class SampleController {
     @GetMapping("/order/{orderId}/orderAmount/{orderAmount}")
     public String getOrder2(@PathVariable String orderId, @PathVariable String orderAmount){
         log.info("orderId : {}, orderAmount : {}", orderId, orderAmount);
+        if ("500".equals(orderId)) {
+            throw new IllegalArgumentException("500 is not valid orderId");
+        }
         return "orderId : " + orderId + ", orderAmount : " + orderAmount;
     }
     @GetMapping("/order")
